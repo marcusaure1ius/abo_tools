@@ -1,4 +1,4 @@
-README.txt
+README.rst
 setup.py
 abo_tools.egg-info/PKG-INFO
 abo_tools.egg-info/SOURCES.txt
