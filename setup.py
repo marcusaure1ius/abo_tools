@@ -14,5 +14,6 @@ install_requires=[
     'pandas==0.25.1',
     'numpy==1.16.5',
     'matplotlib==3.1.1',
-    'plotly==4.4.1'
+    'plotly==4.4.1',
+    'seaborb==0.9.0'
 ]
