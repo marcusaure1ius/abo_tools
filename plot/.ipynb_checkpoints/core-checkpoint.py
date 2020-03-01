@@ -91,30 +91,3 @@ def get_static_heatmap(df, title='', cbar_title='', **kwargs):
     )
     ax.set_ylim(12.0, 0.0)
     plt.show()
-
-def pie_plot(df, column, labels=None, clr=None):
-    colors = ['#721de2','#b5c3ff']
-    if len(colors) > 2:
-        colors = clr
-        
-    if labels is None:
-        labels = df[column].unique()
-
-    explode = df[column].value_counts()
-    
-    const = 0.05
-    l = []
-    for i in range(len(labels)):
-        l.append(const)
-        
-    exp = l
-    fig1, ax1 = plt.subplots()
-    ax1.pie(explode, explode = exp, labels=labels, autopct='%1.1f%%',shadow=False, colors = colors, startangle=90, 
-            textprops={'color':'#000000', 'fontsize':15})
-    ax1.axis('equal')
-    
-    centre_circle = plt.Circle((0,0),0.60,fc='white')
-    fig = plt.gcf()
-    fig.gca().add_artist(centre_circle)
-
-    plt.show()
