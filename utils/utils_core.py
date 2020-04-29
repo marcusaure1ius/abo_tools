@@ -25,4 +25,9 @@ def remove_outlier(df, col):
     fence_low = q1 - 1.5*iqr
     fence_high = q3 + 1.5*iqr
     df.drop(df[(df[col] < fence_low) | (df[col] > fence_high)].index, inplace=True)
-    return df
+
+def nan_dict(map_var):
+    if map_var is np.nan:
+        return 0
+    else:
+        return 1

@@ -6,7 +6,7 @@ import plotly.figure_factory as ff
 import matplotlib.pyplot as plt # библиотека для построения простых графиков
 import seaborn as sns # еще одна библиотека для построения более сложных графиков
 
-def dist_plot(dataframe, column, title, kde_color = 'blue', hist_color = 'blue', **kwargs): # ГРАФИК РАСПРЕДЕЛЕНИЯ
+def dist_plot(dataframe, column, title=None, kde_color = 'blue', hist_color = 'blue', **kwargs): # ГРАФИК РАСПРЕДЕЛЕНИЯ
     plt.figure(figsize=(16,6)) #figure size
     sns.set_style('whitegrid') #background style
     ax = sns.distplot(
@@ -14,19 +14,26 @@ def dist_plot(dataframe, column, title, kde_color = 'blue', hist_color = 'blue',
         kde_kws={'color': '{}'.format(kde_color), 'label': 'Line'}, #kde style
         hist_kws={'color':'{}'.format(hist_color),'label':'Histogram'} #hist style
     )
-    plt.title('Distplot of {}'.format(title)) #plot title
+    if title is None:
+        plt.title('Distplot of {}'.format(column))
+    else:
+        plt.title(title)
     plt.ylabel('Density')#y axis label
     plt.xlabel('{}'.format(column))# x axis label
     plt.show()
 
-def count_plot(dataframe, column, title, hue_var=None, palette = 'Set3', xtick=None,legend=None, **kwargs): # ГРАФИК КОЛ-ВА ЗНАЧЕНИЙ
+def count_plot(dataframe, column, title=None, hue_var=None, palette = 'Set3', xtick=None,legend=None, **kwargs): # ГРАФИК КОЛ-ВА ЗНАЧЕНИЙ
     plt.figure(figsize=(16,6)) #figure size
     sns.set_style('whitegrid') #background style
     if hue_var is None: #if hue is set
         ax = sns.countplot(x = dataframe[column], palette='{}'.format(palette))
     else:
         ax = sns.countplot(x = dataframe[column], palette='{}'.format(palette), hue = dataframe[hue_var])
-    plt.title('Countplot of {}'.format(title)) #plot title
+    
+    if title is None:
+        plt.title('Countplot of {}'.format(column))
+    else:
+        plt.title(title)
     plt.ylabel('Count')#y axis label
     plt.xlabel('{}'.format(column))# x axis label
     if xtick is not None: #if xtick is set
@@ -44,8 +51,8 @@ def inter_hist_plot(dataframe, x_column = None, y_column = None, xbins_size = No
     )
     layout = go.Layout(
         title = title,
-        xaxis = {'title': '{}'.format(x_title)},
-        yaxis = {'title': '{}'.format(y_title)}
+        xaxis = {'title': '{}'.format(x_column)},
+        yaxis = {'title': '{}'.format('Count')}
     )
 
     data = [trace0]
