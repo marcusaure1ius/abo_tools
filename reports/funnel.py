@@ -6,7 +6,7 @@ def create_funnel_df(df, steps):
     Parameters
     ---------
     df : pandas.DataFrame
-        Объект pandas df.
+        Объект pandas df.\n
     steps : list
         Список исследуемых событий. Список необходимо формировать в порядке воронки, от стартового события, до завершающего.
     
@@ -17,7 +17,7 @@ def create_funnel_df(df, steps):
     """
 
     # Фильтруем датафрейм только нужными для нас атрибутами и проверяем, что события из фрейма соответствуют событиям из steps
-    df = df[['id', 'event', 'event_dt']]
+    #df = df[['id', 'event', 'event_dt']]
 
     df = df[df['event'].isin(steps)]
 
@@ -58,9 +58,9 @@ def stacking_funnel(df, steps, col):
     Parameters
     ---------
     df : pandas.DataFrame
-        Объект pandas df.
+        Объект pandas df.\n
     steps : list
-        Список исследуемых событий. Список необходимо формировать в порядке воронки, от стартового события, до завершающего.
+        Список исследуемых событий. Список необходимо формировать в порядке воронки, от стартового события, до завершающего.\n
     col : str
         Фича, по которой будет разделение воронки. Например - OS, воронка будет разделена на iOS и Android.
     
@@ -75,7 +75,7 @@ def stacking_funnel(df, steps, col):
     # Создаем отдельный датафрейм для каждого из параметров разделения (сol) и для каждого из них получаем параметры построения воронки и записываем в словарь
     for entry in df[col].dropna().unique():
         ids_list = ids[entry]
-        df = df[df['id'].isin(ids_list)].copy()
-        if len(df[df['event'] == steps[0]]) > 0:
-            dict_[entry] = create_funnel_df(df, steps)
+        temp_df = df[df['id'].isin(ids_list)].copy()
+        if len(temp_df[temp_df['event'] == steps[0]]) > 0:
+            dict_[entry] = create_funnel_df(temp_df, steps)
     return dict_
