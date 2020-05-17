@@ -125,3 +125,21 @@ def pie_plot(df, column, labels=None, clr=None):
     fig.gca().add_artist(centre_circle)
 
     plt.show()
+
+def bar_plot(x, y, title=None, palette = 'Set3', xtick=None,legend=None, **kwargs): # ГРАФИК КОЛ-ВА ЗНАЧЕНИЙ
+    plt.figure(figsize=(16,6)) #figure size
+    sns.set_style('darkgrid') #background style
+    ax = sns.barplot(x=x, y=y, palette='{}'.format(palette))
+    
+    if title is None:
+        plt.title('Countplot')
+    else:
+        plt.title(title)
+    #plt.ylabel('Count')#y axis label
+    #plt.xlabel('{}'.format(column))# x axis label
+    if xtick is not None: #if xtick is set
+        ax.set_xticklabels(xtick)
+    if legend is not None:
+        handles, _ = ax.get_legend_handles_labels()
+        ax.legend(handles, legend)
+    plt.show()
